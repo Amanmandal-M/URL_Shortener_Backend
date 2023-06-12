@@ -1,10 +1,11 @@
+// Import packages to Generate a random URL.
 const shortid = require('shortid');
-
 
 // Models Location
 const { urlModel } = require("../models/urlShortenerModel");
 
 
+// This controller should allow users to view shorted URL.
 const urlGetController = async (req,res) => {
     const paramsData = req.params.data;
     try {
@@ -16,8 +17,10 @@ const urlGetController = async (req,res) => {
     } catch (error) {
         res.status(500).json("Internal Server Error")
     }
-}
+};
 
+
+// This controller should allow users to add the original URL in database and generates a short URL.
 const urlPostController = async (req,res) => {
     const {originalUrl , shortUrl , createdAt , location , ipAddress} = req.body;
 
@@ -43,16 +46,6 @@ const urlPostController = async (req,res) => {
             "Message":"Url Shorted",
             "data": data
         });
-
-        function DateData () {
-            const currentDate = new Date();
-            const year = currentDate.getFullYear();
-            const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-            const day = String(currentDate.getDate()).padStart(2, '0');
-    
-            const formattedDate = `${day}-${month}-${year}`;
-            return formattedDate;
-        }
     
         function TimeData () {
             const currentDate =  new Date();
@@ -70,7 +63,7 @@ const urlPostController = async (req,res) => {
         console.log(error.message);
         res.status(500).json("Internal Server Error")
     }
-}
+};
 
 
 module.exports = { urlGetController , urlPostController }
