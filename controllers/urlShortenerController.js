@@ -24,9 +24,10 @@ const urlGetController = async (req,res) => {
 const urlPostController = async (req,res) => {
     const {originalUrl , shortUrl , createdAt , location , ipAddress} = req.body;
     try {
+        const checkUrl = await urlModel.findOne({originalUrl:originalUrl})
         if(checkUrl) return res.status(201).send({
             "Message": "URL Already Exists",
-            "ShortedUrl" : checkUrl.shortUrl
+            "data" : checkUrl
         });
 
         const data = new urlModel({
