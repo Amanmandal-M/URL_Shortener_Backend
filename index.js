@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 require('dotenv').config();
 
@@ -14,7 +15,7 @@ const { urlRouter } = require('./routes/urlShortenerRoute');
 
 // Middlewares
 app.use(express.json());
-
+app.use(cors());
 
 // Default Routes
 app.get('/', (req,res)=> res.status(200).send(`<h1 style="text-align:center;color:blue;">Welcome to URL Shortener Backend</h1>`))
