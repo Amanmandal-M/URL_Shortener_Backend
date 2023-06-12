@@ -4,9 +4,6 @@ const shortid = require('shortid');
 // Models Location
 const { urlModel } = require("../models/urlShortenerModel");
 
-// Generate a random URL
-
-
 
 const urlGetController = async (req,res) => {
     const paramsData = req.params.data;
@@ -23,7 +20,10 @@ const urlGetController = async (req,res) => {
 
 const urlPostController = async (req,res) => {
     const {originalUrl , shortUrl , createdAt , location , ipAddress} = req.body;
+
+    // Generate a random URL
     const randomUrl = shortid.generate();
+
     try {
         const checkUrl = await urlModel.findOne({originalUrl:originalUrl})
         if(checkUrl) return res.status(201).send({
